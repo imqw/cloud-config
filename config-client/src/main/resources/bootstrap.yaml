@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: cloudconf
@@ -7,3 +6,21 @@ spring:
       uri: http://localhost:8081/
       profile: dev
       label: master
+    # 消息总线配置
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+      refresh:
+        enabled: true # 开启总线消息更新功能
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+# 屏蔽安全验证
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' # 可以选择【"health","mappings","bus-refresh"】三种选项暴露那些端点
