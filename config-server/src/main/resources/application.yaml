@@ -12,5 +12,5 @@ spring:
           uri: https://github.com/imqw/config-application
           username:
           password:
-          search-paths: 'cscc,cscc/{application}' #根据输入的{application}自动匹配对应的配置文件--针对有子目录的库
+          search-paths: 'cscc,cscc/cscc_{application}' #根据输入的{application}自动匹配对应的配置文件--针对有子目录的库
       label: dev          #git配置文件分支

@@ -1,7 +1,7 @@
 
 spring:
   application:
-    name: cscc_accidentify
+    name: test
   cloud:
     config:
       uri: http://localhost:8080/mser/configs
