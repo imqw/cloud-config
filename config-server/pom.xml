@@ -10,13 +10,15 @@
     </parent>
     <groupId>com.cloud</groupId>
     <artifactId>config</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>config</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <docker.repostory>172.30.66.35:10080</docker.repostory>
+        <docker.registry.name>plugin</docker.registry.name>
     </properties>
 
     <dependencies>
@@ -44,10 +46,58 @@
     </dependencyManagement>
 
     <build>
+        <finalName>${project.name}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.0</version>
+
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>push-image</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                        <configuration>
+                            <imageName>${docker.repostory}/${docker.registry.name}/${project.name}:${project.version}</imageName>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <dockerHost>http://172.30.64.12:4243</dockerHost>
+                    <!-- 私有仓库配置，需要settings.xml文件配合serverId对应的服务地址 -->
+                    <serverId>docker-gaoyang</serverId>
+                    <registryUrl>${docker.repostory}</registryUrl>
+                    <!-- <forceTags>true</forceTags> -->
+                    <!--install阶段也上传，否则只有deploy阶段上传-->
+                    <pushImage>true</pushImage>
+                    <dockerDirectory>${project.basedir}</dockerDirectory>
+                    <imageName>${docker.repostory}/${docker.registry.name}/${project.name}</imageName>
+                    <imageTags>
+                        <imageTag>${project.version}</imageTag>
+                    </imageTags>
+                </configuration>
             </plugin>
         </plugins>
     </build>

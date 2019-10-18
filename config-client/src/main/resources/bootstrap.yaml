@@ -1,9 +1,9 @@
 
 spring:
   application:
-    name: cloudconf
+    name: cscc_accidentify
   cloud:
     config:
-      uri: http://localhost:8081/
+      uri: http://localhost:8080/mser/configs
       profile: dev
-      label: master
+#      label: dev

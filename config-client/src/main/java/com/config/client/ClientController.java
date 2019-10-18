@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ClientController {
 
-    @Value("${profile}")
+    @Value("${mybatis-plus.mapper-locations}")
     private String profile;
 
-    @Value("${name}")
+    @Value("${service.paycostUrl}")
     private String name;
 
 
-    @GetMapping("/profile")
-    public String hello(){
 
-        return this.profile +"   :    "+this.name;
+    @GetMapping("/profile")
+    public String hello() {
+
+        return this.profile + "   :    " + this.name;
     }
 
 }
