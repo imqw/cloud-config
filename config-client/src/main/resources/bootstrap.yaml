@@ -6,4 +6,4 @@ spring:
     config:
       uri: http://localhost:8080/mser/configs
       profile: dev
-#      label: dev
+      label: dev

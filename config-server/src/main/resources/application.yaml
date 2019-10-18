@@ -9,8 +9,8 @@ spring:
     config:
       server:
         git:
-          uri: https://gitlab.19ego.cn/urp/configrepo_xixian_cscc.git
-          username: qiuwei@19pay.com.cn
-          password: jiang4929
-          search-paths: 'cscc,cscc/{application}/' #根据输入的{application}自动匹配对应的配置文件--针对有子目录的库
-      label: master          #git配置文件分支
+          uri: https://github.com/imqw/config-application
+          username:
+          password:
+          search-paths: 'cscc,cscc/{application}' #根据输入的{application}自动匹配对应的配置文件--针对有子目录的库
+      label: dev          #git配置文件分支
